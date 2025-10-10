@@ -39,7 +39,7 @@
             }
             if (Yusuf_Key == true){
                 if (YH_First_Msg_NULL == true){
-                    fetch(YH_API_KEY,{
+                    fetch(M_API_KEY,{
                         method : "POST",
                         headers: {
                             "Content-Type": "application/json" 
@@ -62,7 +62,7 @@
         }
         if (e.key == "Enter" && MuratNoSpam == false){
             MuratNoSpam = true
-            fetch(M_API_KEY,{
+            fetch(YH_API_KEY,{
                 method : "POST",
                 headers:{
                     "Content-Type": "application/json" 
